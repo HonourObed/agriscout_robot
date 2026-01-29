@@ -1,0 +1,19 @@
+# ROS 2 Build Artifacts (HUGE - Do not upload!)
+build/
+install/
+log/
+.colcon/
+
+# Python caches
+__pycache__/
+*.py[cod]
+
+# Editor / OS junk
+.vscode/
+.idea/
+.DS_Store
+*.swp
+
+# Local developer keys (Safety)
+*.pem
+*.key

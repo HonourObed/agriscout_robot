@@ -5,7 +5,7 @@
 
     <link name="base_link">
         <visual>
-            <origin xyz="-0.11 -0.1 0" rpy="1.57 0 1.57"/>
+            <origin xyz="-0.11 -0.1 -0.03" rpy="1.57 0 1.57"/>
             <geometry>
                 <mesh filename="package://agriscout_description/meshes/chassis.STL" scale="0.001 0.001 0.001"/>
             </geometry>
@@ -13,29 +13,26 @@
                 <color rgba="0 0 0.8 1"/>
             </material>
         </visual>
-        
         <collision>
             <origin xyz="0 0 0.05" rpy="0 0 0"/>
             <geometry>
                 <box size="0.24 0.18 0.08"/>
             </geometry>
         </collision>
-
         <inertial>
             <mass value="2.0"/>
             <inertia ixx="0.01" ixy="0" ixz="0" iyy="0.01" iyz="0" izz="0.01"/>
         </inertial>
     </link>
-
     <joint name="base_joint" type="fixed">
         <parent link="base_footprint"/>
         <child link="base_link"/>
         <origin xyz="0 0 0" rpy="0 0 0"/>
     </joint>
 
-    <link name="left_track">
+    <link name="left_track_visual">
         <visual>
-            <origin xyz="-0.15 -0.04 0" rpy="1.57 0 1.57"/>
+            <origin xyz="-0.15 -0.04 -0.03" rpy="1.57 0 1.57"/>
             <geometry>
                 <mesh filename="package://agriscout_description/meshes/track.STL" scale="0.001 0.001 0.001"/>
             </geometry>
@@ -43,42 +40,95 @@
                 <color rgba="0.1 0.1 0.1 1"/>
             </material>
         </visual>
-        <collision>
-            <geometry>
-                <box size="0.25 0.05 0.1"/>
-            </geometry>
-        </collision>
-    </link>
+        </link>
 
-    <link name="right_track">
+    <joint name="left_track_visual_joint" type="fixed">
+        <parent link="base_link"/>
+        <child link="left_track_visual"/>
+        <origin xyz="0 0.12 0.04" rpy="0 0 0"/>
+    </joint>
+
+    <link name="right_track_visual">
         <visual>
-            <origin xyz="-0.15 0.01 0" rpy="1.57 0 1.57"/>
+            <origin xyz="-0.15 0.01 -0.03" rpy="1.57 0 1.57"/>
             <geometry>
                 <mesh filename="package://agriscout_description/meshes/track.STL" scale="0.001 0.001 0.001"/>
             </geometry>
             <material name="black"/>
         </visual>
+    </link>
+
+    <joint name="right_track_visual_joint" type="fixed">
+        <parent link="base_link"/>
+        <child link="right_track_visual"/>
+        <origin xyz="0 -0.12 0.04" rpy="0 0 0"/>
+    </joint>
+
+    <link name="left_rear_wheel">
         <collision>
+            <origin xyz="0 0 0" rpy="1.57 0 0"/>
             <geometry>
-                <box size="0.25 0.05 0.1"/>
+                <cylinder length="0.04" radius="0.04"/>
             </geometry>
         </collision>
     </link>
 
-    <joint name="left_track_joint" type="fixed">
+    <joint name="left_rear_joint" type="continuous">
         <parent link="base_link"/>
-        <child link="left_track"/>
-        <origin xyz="0 0.12 0.04" rpy="0 0 0"/>
+        <child link="left_rear_wheel"/>
+        <origin xyz="-0.09 0.12 0.04" rpy="0 0 0"/>
+        <axis xyz="0 1 0"/>
     </joint>
 
-    <joint name="right_track_joint" type="fixed">
+    <link name="left_front_wheel">
+        <collision>
+            <origin xyz="0 0 0" rpy="1.57 0 0"/>
+            <geometry>
+                <cylinder length="0.04" radius="0.04"/>
+            </geometry>
+        </collision>
+    </link>
+
+    <joint name="left_front_joint" type="continuous">
         <parent link="base_link"/>
-        <child link="right_track"/>
-        <origin xyz="0 -0.12 0.04" rpy="0 0 0"/>
+        <child link="left_front_wheel"/>
+        <origin xyz="0.09 0.12 0.04" rpy="0 0 0"/>
+        <axis xyz="0 1 0"/>
     </joint>
 
+    <link name="right_rear_wheel">
+        <collision>
+            <origin xyz="0 0 0" rpy="1.57 0 0"/>
+            <geometry>
+                <cylinder length="0.04" radius="0.04"/>
+            </geometry>
+        </collision>
+    </link>
 
-   <link name="camera_link">
+    <joint name="right_rear_joint" type="continuous">
+        <parent link="base_link"/>
+        <child link="right_rear_wheel"/>
+        <origin xyz="-0.09 -0.12 0.04" rpy="0 0 0"/>
+        <axis xyz="0 1 0"/>
+    </joint>
+
+    <link name="right_front_wheel">
+        <collision>
+            <origin xyz="0 0 0" rpy="1.57 0 0"/>
+            <geometry>
+                <cylinder length="0.04" radius="0.04"/>
+            </geometry>
+        </collision>
+    </link>
+
+    <joint name="right_front_joint" type="continuous">
+        <parent link="base_link"/>
+        <child link="right_front_wheel"/>
+        <origin xyz="0.09 -0.12 0.04" rpy="0 0 0"/>
+        <axis xyz="0 1 0"/>
+    </joint>
+
+    <link name="camera_link">
         <visual>
             <geometry>
                 <box size="0.025 0.025 0.025"/> </geometry>
@@ -117,4 +167,5 @@
         <child link="imu_link"/>
         <origin xyz="0 0 0.06" rpy="0 0 0"/>
     </joint>
+
 </robot>

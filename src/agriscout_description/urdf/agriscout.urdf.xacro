@@ -5,7 +5,7 @@
 
     <link name="base_link">
         <visual>
-            <origin xyz="-0.11 -0.1 -0.03" rpy="1.57 0 1.57"/>
+            <origin xyz="-0.11 -0.1 -0.05" rpy="1.57 0 1.57"/>
             <geometry>
                 <mesh filename="package://agriscout_description/meshes/chassis.STL" scale="0.001 0.001 0.001"/>
             </geometry>
@@ -13,118 +13,133 @@
                 <color rgba="0 0 0.8 1"/>
             </material>
         </visual>
+        
         <collision>
-            <origin xyz="0 0 0.05" rpy="0 0 0"/>
+            <origin xyz="0 -0.0135 0.03" rpy="0 0 0"/>
             <geometry>
-                <box size="0.24 0.18 0.08"/>
+                <box size="0.22 0.14 0.06"/>
             </geometry>
         </collision>
+
         <inertial>
             <mass value="2.0"/>
             <inertia ixx="0.01" ixy="0" ixz="0" iyy="0.01" iyz="0" izz="0.01"/>
         </inertial>
     </link>
+    
     <joint name="base_joint" type="fixed">
         <parent link="base_footprint"/>
         <child link="base_link"/>
         <origin xyz="0 0 0" rpy="0 0 0"/>
     </joint>
 
-    <link name="left_track_visual">
+    <link name="left_rear_wheel">
         <visual>
-            <origin xyz="-0.15 -0.04 -0.03" rpy="1.57 0 1.57"/>
+            <origin xyz="0 0 0" rpy="1.57 0 0"/>
             <geometry>
-                <mesh filename="package://agriscout_description/meshes/track.STL" scale="0.001 0.001 0.001"/>
+                <cylinder length="0.02" radius="0.035"/>
             </geometry>
             <material name="black">
                 <color rgba="0.1 0.1 0.1 1"/>
             </material>
         </visual>
-        </link>
-
-    <joint name="left_track_visual_joint" type="fixed">
-        <parent link="base_link"/>
-        <child link="left_track_visual"/>
-        <origin xyz="0 0.12 0.04" rpy="0 0 0"/>
-    </joint>
-
-    <link name="right_track_visual">
-        <visual>
-            <origin xyz="-0.15 0.01 -0.03" rpy="1.57 0 1.57"/>
-            <geometry>
-                <mesh filename="package://agriscout_description/meshes/track.STL" scale="0.001 0.001 0.001"/>
-            </geometry>
-            <material name="black"/>
-        </visual>
-    </link>
-
-    <joint name="right_track_visual_joint" type="fixed">
-        <parent link="base_link"/>
-        <child link="right_track_visual"/>
-        <origin xyz="0 -0.12 0.04" rpy="0 0 0"/>
-    </joint>
-
-    <link name="left_rear_wheel">
         <collision>
             <origin xyz="0 0 0" rpy="1.57 0 0"/>
             <geometry>
-                <cylinder length="0.04" radius="0.04"/>
+                <cylinder length="0.02" radius="0.035"/>
             </geometry>
         </collision>
+        <inertial>
+            <mass value="0.2"/>
+            <inertia ixx="0.001" ixy="0" ixz="0" iyy="0.001" iyz="0" izz="0.001"/>
+        </inertial>
     </link>
 
     <joint name="left_rear_joint" type="continuous">
         <parent link="base_link"/>
         <child link="left_rear_wheel"/>
-        <origin xyz="-0.09 0.12 0.04" rpy="0 0 0"/>
+        <origin xyz="-0.035 0.065 0.03" rpy="0 0 0"/>
         <axis xyz="0 1 0"/>
     </joint>
 
     <link name="left_front_wheel">
+        <visual>
+            <origin xyz="0 0 0" rpy="1.57 0 0"/>
+            <geometry>
+                <cylinder length="0.02" radius="0.035"/>
+            </geometry>
+            <material name="black"/>
+        </visual>
         <collision>
             <origin xyz="0 0 0" rpy="1.57 0 0"/>
             <geometry>
-                <cylinder length="0.04" radius="0.04"/>
+                <cylinder length="0.02" radius="0.035"/>
             </geometry>
         </collision>
+        <inertial>
+            <mass value="0.2"/>
+            <inertia ixx="0.001" ixy="0" ixz="0" iyy="0.001" iyz="0" izz="0.001"/>
+        </inertial>
     </link>
 
     <joint name="left_front_joint" type="continuous">
         <parent link="base_link"/>
         <child link="left_front_wheel"/>
-        <origin xyz="0.09 0.12 0.04" rpy="0 0 0"/>
+        <origin xyz="0.073 0.065 0.03" rpy="0 0 0"/>
         <axis xyz="0 1 0"/>
     </joint>
 
     <link name="right_rear_wheel">
+        <visual>
+            <origin xyz="0 0 0" rpy="1.57 0 0"/>
+            <geometry>
+                <cylinder length="0.02" radius="0.035"/>
+            </geometry>
+            <material name="black"/>
+        </visual>
         <collision>
             <origin xyz="0 0 0" rpy="1.57 0 0"/>
             <geometry>
-                <cylinder length="0.04" radius="0.04"/>
+                <cylinder length="0.02" radius="0.035"/>
             </geometry>
         </collision>
+        <inertial>
+            <mass value="0.2"/>
+            <inertia ixx="0.001" ixy="0" ixz="0" iyy="0.001" iyz="0" izz="0.001"/>
+        </inertial>
     </link>
 
     <joint name="right_rear_joint" type="continuous">
         <parent link="base_link"/>
         <child link="right_rear_wheel"/>
-        <origin xyz="-0.09 -0.12 0.04" rpy="0 0 0"/>
+        <origin xyz="-0.035 -0.09 0.03" rpy="0 0 0"/>
         <axis xyz="0 1 0"/>
     </joint>
 
     <link name="right_front_wheel">
+        <visual>
+            <origin xyz="0 0 0" rpy="1.57 0 0"/>
+            <geometry>
+                <cylinder length="0.02" radius="0.035"/>
+            </geometry>
+            <material name="black"/>
+        </visual>
         <collision>
             <origin xyz="0 0 0" rpy="1.57 0 0"/>
             <geometry>
-                <cylinder length="0.04" radius="0.04"/>
+                <cylinder length="0.02" radius="0.035"/>
             </geometry>
         </collision>
+        <inertial>
+            <mass value="0.2"/>
+            <inertia ixx="0.001" ixy="0" ixz="0" iyy="0.001" iyz="0" izz="0.001"/>
+        </inertial>
     </link>
 
     <joint name="right_front_joint" type="continuous">
         <parent link="base_link"/>
         <child link="right_front_wheel"/>
-        <origin xyz="0.09 -0.12 0.04" rpy="0 0 0"/>
+        <origin xyz="0.073 -0.09 0.03" rpy="0 0 0"/>
         <axis xyz="0 1 0"/>
     </joint>
 
@@ -136,12 +151,17 @@
                 <color rgba="1 0 0 1"/>
             </material>
         </visual>
+        <collision>
+             <geometry>
+                <box size="0.025 0.025 0.025"/> 
+            </geometry>
+        </collision>
     </link>
 
     <joint name="camera_joint" type="fixed">
         <parent link="base_link"/>
         <child link="camera_link"/>
-        <origin xyz="0.12 0 0.08" rpy="0 0 0"/> 
+        <origin xyz="0.12 -0.0135 0.08" rpy="0 0 0"/> 
     </joint>
 
     <link name="camera_optical_link"/>
@@ -165,7 +185,7 @@
     <joint name="imu_joint" type="fixed">
         <parent link="base_link"/>
         <child link="imu_link"/>
-        <origin xyz="0 0 0.06" rpy="0 0 0"/>
+        <origin xyz="0 -0.0135 0.06" rpy="0 0 0"/>
     </joint>
 
 </robot>

@@ -1,0 +1,20 @@
+controller_manager:
+  ros__parameters:
+    update_rate: 30
+    use_sim_time: true
+
+    agriscout_base_controller:
+      type: diff_drive_controller/DiffDriveController
+
+    joint_state_broadcaster:
+      type: joint_state_broadcaster/JointStateBroadcaster
+
+agriscout_base_controller:
+  ros__parameters:
+    left_wheel_names: ["left_front_joint", "left_rear_joint"]
+    right_wheel_names: ["right_front_joint", "right_rear_joint"]
+    
+    wheel_separation: 0.155
+    wheel_radius: 0.035
+
+    use_stamped_vel: false

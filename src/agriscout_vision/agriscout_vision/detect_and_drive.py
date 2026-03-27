@@ -1,4 +1,6 @@
-#!/usr/bin/env python3
+# Add this import at the top of your file
+from ament_index_python.packages import get_package_share_directory
+import os
 import rclpy
 from rclpy.node import Node
 from geometry_msgs.msg import TwistStamped
@@ -36,14 +38,20 @@ class DetectAndDriveNode(Node):
         self.turn_speed_multiplier = 0.002
         
         # 3. Load YOLOv8 Model
-        model_path = os.path.join(os.path.dirname(__file__), 'models', 'best.pt')
+        # This looks in the exact directory where THIS script is currently running
+        current_dir = os.path.dirname(__file__)
+        model_path = os.path.join(current_dir, 'models', 'best.pt')
+        
+        # DEBUG PRINT: This will tell us exactly where ROS is searching
+        self.get_logger().info(f"========== LOOKING FOR MODEL HERE: {model_path} ==========")
+        
         if os.path.exists(model_path):
             self.get_logger().info(f"Loading custom model: {model_path}")
             self.yolo = YOLO(model_path)
         else:
             self.get_logger().warn("Custom best.pt not found! Falling back to yolov8n.pt")
             self.yolo = YOLO("yolov8n.pt")
-            self.target_class_id = 64  # 'potted plant' in COCO for fallback testing
+            self.target_class_id = 64 # Default class ID for "potted plant" in COCO dataset
             
         # 4. Initialize Webcam
         self.cap = cv2.VideoCapture(0)

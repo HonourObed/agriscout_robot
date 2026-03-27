@@ -1,3 +1,5 @@
+import os
+from glob import glob
 from setuptools import find_packages, setup
 
 package_name = 'agriscout_vision'
@@ -6,6 +8,11 @@ setup(
     name=package_name,
     version='0.0.0',
     packages=find_packages(exclude=['test']),
+    # ADD THIS: This tells Python to include any .pt files inside the models folder
+    package_data={
+        package_name: ['models/*.pt'],
+    },
+
     data_files=[
         ('share/ament_index/resource_index/packages',
             ['resource/' + package_name]),

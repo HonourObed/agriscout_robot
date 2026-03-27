@@ -1,6 +1,6 @@
 controller_manager:
   ros__parameters:
-    update_rate: 30
+    update_rate: 100
     use_sim_time: true
 
     agriscout_base_controller:
@@ -17,4 +17,9 @@ agriscout_base_controller:
     wheel_separation: 0.155
     wheel_radius: 0.035
 
-    use_stamped_vel: false
+    use_stamped_vel: true
+
+    publish_rate: 50.0
+    base_frame_id: base_link
+    cmd_vel_timeout: 0.5    # ← give commands 500ms to arrive
+    use_sim_time: true      # ← also set here for the controller itself

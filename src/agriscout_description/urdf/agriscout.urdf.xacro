@@ -19,7 +19,7 @@
         <collision>
             <origin xyz="0 -0.0135 0.03" rpy="0 0 0"/>
             <geometry>
-                <box size="0.22 0.14 0.06"/>
+                <box size="0.22 0.10 0.06"/>
             </geometry>
         </collision>
 
@@ -62,6 +62,7 @@
         <child link="left_rear_wheel"/>
         <origin xyz="-0.035 0.065 0.03" rpy="0 0 0"/>
         <axis xyz="0 1 0"/>
+        <limit effort="100.0" velocity="100.0"/>
     </joint>
 
     <link name="left_front_wheel">
@@ -89,6 +90,7 @@
         <child link="left_front_wheel"/>
         <origin xyz="0.073 0.065 0.03" rpy="0 0 0"/>
         <axis xyz="0 1 0"/>
+        <limit effort="100.0" velocity="100.0"/>
     </joint>
 
     <link name="right_rear_wheel">
@@ -116,6 +118,7 @@
         <child link="right_rear_wheel"/>
         <origin xyz="-0.035 -0.09 0.03" rpy="0 0 0"/>
         <axis xyz="0 1 0"/>
+        <limit effort="100.0" velocity="100.0"/>
     </joint>
 
     <link name="right_front_wheel">
@@ -143,6 +146,7 @@
         <child link="right_front_wheel"/>
         <origin xyz="0.073 -0.09 0.03" rpy="0 0 0"/>
         <axis xyz="0 1 0"/>
+        <limit effort="100.0" velocity="100.0"/>
     </joint>
 
     <link name="camera_link">

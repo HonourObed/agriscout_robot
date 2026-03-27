@@ -11,6 +11,7 @@ def generate_launch_description():
             "--controller-manager",
             "/controller_manager",
         ],
+        parameters=[{"use_sim_time": True}],   # ← add this
     )
 
     drive_controller_spawner = Node(
@@ -21,6 +22,7 @@ def generate_launch_description():
             "--controller-manager",
             "/controller_manager",
         ],
+        parameters=[{"use_sim_time": True}],   # ← add this
     )
 
     return LaunchDescription([

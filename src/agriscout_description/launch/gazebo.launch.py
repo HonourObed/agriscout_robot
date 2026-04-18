@@ -13,10 +13,24 @@ def generate_launch_description():
     # Paths
     agriscout_description = get_package_share_directory("agriscout_description")
     
-    # Resource path so Gazebo finds your meshes
+    # Define the path to your custom world
+    world_file = os.path.join(agriscout_description, "worlds", "farm_world.sdf")
+    
+    # Define the exact path to your new 'models' folder
+    models_path = os.path.join(agriscout_description, "models")
+    parent_path = str(Path(agriscout_description).parent.resolve())
+    
+    # Resource path so Gazebo finds BOTH your robot meshes and your world models
     gazebo_resource_path = SetEnvironmentVariable(
         name="GZ_SIM_RESOURCE_PATH",
-        value=[str(Path(agriscout_description).parent.resolve())]
+        value=f"{models_path}:{parent_path}"
+    )
+
+    # Launch Modern Gazebo (ros_gz_sim) - ONLY DEFINED ONCE NOW!
+    gazebo = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource([os.path.join(
+            get_package_share_directory("ros_gz_sim"), "launch", "gz_sim.launch.py")]),
+            launch_arguments=[("gz_args", [f" -v 4 -r {world_file}"])]
     )
 
     # Robot State Publisher
@@ -28,13 +42,6 @@ def generate_launch_description():
         package="robot_state_publisher",
         executable="robot_state_publisher",
         parameters=[{"robot_description": robot_description, "use_sim_time": True}]
-    )
-
-    # Launch Modern Gazebo (ros_gz_sim)
-    gazebo = IncludeLaunchDescription(
-        PythonLaunchDescriptionSource([os.path.join(
-            get_package_share_directory("ros_gz_sim"), "launch", "gz_sim.launch.py")]),
-            launch_arguments=[("gz_args", [" -v 4", " -r", " empty.sdf"])]
     )
 
     # Spawn Robot

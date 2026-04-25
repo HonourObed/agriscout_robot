@@ -31,7 +31,8 @@ setup(
     },
     entry_points={
         'console_scripts': [
-            'detect_and_drive = agriscout_vision.detect_and_drive:main'
+            'detect_and_drive = agriscout_vision.detect_and_drive:main',
+            'pc_bridge_node = agriscout_vision.pc_bridge_node:main'
         ],
     },
 )
